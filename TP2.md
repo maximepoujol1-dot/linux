@@ -101,4 +101,103 @@ Modifiez votre adresse de gateway et essayez d'aller sur un site internet
 ![c5](img/c5.png)
 
 
+III. Manipulations d'autres outils/protocoles côté client
 
+1. DHCP
+
+afficher l'adresse IP du serveur DHCP du réseau WiFi : 
+
+    - ipconfig /all
+
+Trouver la date d'expiration de votre bail DHCP :
+
+![c6](img/c6.png)
+
+Fonctionnement du DHCP dans les grandes lignes :
+
+    -Le DHCP est un protocole ayant pour but d’attribuer, durant un certain temps (appelé un bail), une adresse IP aux différents éléments qui se connectent au réseau.
+    -En rendant l’attribution des adresses automatique, il permet d’assigner une adresse unique à chaque élément et d’éviter que plusieurs équipements aient la même adresse IP.
+
+Demandez une nouvelle adresse IP (en ligne de commande) :
+
+    On utilise les commande "ipconfig /release" et "ipconfig /renew".
+
+    - avant :
+
+![c6](img/c6.png)
+
+    - après :
+
+![c7](img/c7.png)    
+
+    L'adresse est rester la même suite au fonction du DHCP de chez moi mais on remarque que le bail a bien changer.
+    Ainsi l'operation a bien eu lieu.
+
+2. DNS
+
+trouver l'adresse IP du serveur DNS que connaît votre ordinateur :
+
+![c8](img/c8.png)
+
+    - on constate que l'adresse IP du serveur DNS est 192.168.1.254
+
+en ligne de commande avec l'outil nslookup, trouver:
+
+    - pour google.com
+
+![c9](img/c9.png)   
+
+    - pour ynov.com
+
+![c10](img/c10.png)   
+
+interpréter les résultats de ces commandes :
+
+    - Le DNS renvoie une ou plusieurs IPs correspondant au nom de domaine donné.
+    - Dans le cas de google.com, on en retourve qu'une adresse.
+    - Dans le cas de ynov.com, on en retourve plusieurs adresses surment pour le trafic sur plusieurs serveur.
+    - Les serveur sont dis UnKnown car il n'y a pas de nom enregistrer pour le routeur domestique de ma maison.
+
+
+faites un reverse lookup (= "dis moi si tu connais un nom de domaine pour telle IP")
+
+    pour l'adresse 78.78.21.21 :
+
+![c11](img/c11.png)       
+
+    pour l'adresse 92.16.54.88 :
+
+![c12](img/c12.png)        
+
+    interprétetation des résultats :
+
+    - Le DNS renvoie cette fois le nom relier au adresse IP.
+    - Dans le cas de 78.78.21.21, on en retourve "telia.com" un site de produis informatique suedois.
+    - Dans le cas de 92.16.54.88, on en retourve as13285.net, un nom de domaine a acheter.
+    - Les serveur sont dis UnKnown car il n'y a pas de nom enregistrer pour le routeur domestique de ma maison.
+
+
+3. Bonus : aller plus loin
+
+ouvrir Wireshark pendant les requêtes DHCP et DNS et se renseigner sur les différences entre WiFi et câble :
+
+![c13](img/c13.png) 
+
+    Wifi :
+        -plus lent
+        -plus de latence
+        -onde envoyer
+
+    cable :
+        -plus rapide
+        -moins de latence
+        -connection physique
+
+explorer l'interface d'administration de votre box (chez vous) avec tout ça en tête 
+
+A quoi la MAC si on a des IP ? => Se renseigner sur ARP :
+
+    -Le protocole Arp sert a retrouver une adresse MAC quand on a une adresse IP.
+    -On peut utiliser la commande "arp -a" pour retrouver les IP, l'adresse MAC associé et enfin le type ( Dynamique ou statique)
+
+utiliser un switch (physique) et se connecter non pas à 2, mais à 3 ou 4 ou 5 et faire mumuse avec le réseau ainsi créé :
