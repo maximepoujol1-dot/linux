@@ -100,6 +100,7 @@ Modifiez votre adresse de gateway et essayez d'aller sur un site internet
 
 ![c5](img/c5.png)
 
+On remarque que l'on ne peut plsu acceder a internet car ne correspond pas a celle du reseau.
 
 III. Manipulations d'autres outils/protocoles côté client
 
