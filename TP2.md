@@ -1,5 +1,4 @@
-# TP 2 
-
+### TP 2
 
 I. Exploration locale en solo
 
@@ -41,26 +40,26 @@ Affichez votre gateway
 
 
 
-# En graphique (GUI : Graphical User Interface)
+## En graphique (GUI : Graphical User Interface)
 
 En utilisant l'interface graphique de votre OS :
 Trouvez comment afficher les informations sur une carte IP (change selon l'OS) :
 
-    - paramêtre, réseau et internet, wifi, WIFI@YNOV
+    - paramètre, réseau et internet, wifi, WIFI@YNOV
 
 trouvez l'IP, la MAC et la gateway pour l'interface WiFi de votre PC
 
 ![c1](img/c1.png)
 
-# Questions : à quoi sert la gateway dans le réseau d'Ingésup ?
+## Questions : à quoi sert la gateway dans le réseau d'Ingésup ?
 
-    - La gateway du réseau d'Ingésup sert d'intermediaire en ce réseau et les autres pour communiquer.
+    - La gateway du réseau d'Ingésup sert d'intermédiaire en ce réseau et les autres pour communiquer.
 
 2. Modifications des informations
 
-A. Modification d'adresse IP - pt. 1
+### A. Modification d'adresse IP - pt. 1
 
-Utilisez l'interface graphique de vorte OS pour changer d'adresse IP :
+Utilisez l'interface graphique de votre OS pour changer d'adresse IP :
 
 calculez la première et la dernière IP disponibles du réseau (pour rappel, l'adresse de réseau et l'adresse broadcast ne sont pas "disponibles")
 
@@ -73,13 +72,13 @@ changez l'adresse IP de votre carte WiFi pour une autre (mais toujours dans le m
 ![c2](img/c2.png)
 
 
-B. nmap
+### B. nmap
 
-vérification de l'tinstallation :
+vérification de l'installation :
 
     - nmap --version
 
-trouvez les hôtes actuellements sur le réseau :
+trouvez les hôtes actuellement sur le réseau :
 
     - nmap -sn -PE 10.33.64.0
 
@@ -87,12 +86,9 @@ trouvez les hôtes actuellements sur le réseau :
 ![c3](img/c3.png)
 
 
-C. Modification d'adresse IP - pt. 2
-
-
+### C. Modification d'adresse IP - pt. 2
 
 Modifiez de nouveau votre adresse IP vers une adresse IP que vous savez libre grâce à nmap
-
 
 Modifiez votre adresse de gateway et essayez d'aller sur un site internet
 
@@ -100,7 +96,90 @@ Modifiez votre adresse de gateway et essayez d'aller sur un site internet
 
 ![c5](img/c5.png)
 
-On remarque que l'on ne peut plsu acceder a internet car ne correspond pas a celle du reseau.
+On remarque que l'on ne peut plus accéder à internet car la gateway ne correspond pas à celle du réseau.
+
+
+
+
+II. Exploration locale en duo
+
+1. Prérequis
+
+- Deux PC avec ports RJ45
+- Un câble RJ45
+- Firewalls désactivés sur les deux PC
+
+2. Câblage
+
+- Branchement des deux PC avec ports RJ45
+
+3. Modification d'adresse IP
+
+- Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau. Exemples :
+
+  - PC1 : 192.168.1.10/24
+  - PC2 : 192.168.1.11/24
+
+- Vérifiez à l'aide des commandes adaptées :
+
+  - Linux/macOS : `ip addr`
+  - Windows : `ipconfig`
+
+- Testez la connectivité entre les deux machines avec `ping` :
+
+  - PC1 -> PC2 : `ping 192.168.1.11`
+  - PC2 -> PC1 : `ping 192.168.1.10`
+
+- Essayez différents masques : `/20`, `/24`, puis le plus petit réseau que vous pouvez configurer.
+
+- Exercice : inventez un nouveau réseau (ex : `172.16.18.0/24`) et attribuez des adresses aux deux PC.
+
+4. Utilisation d'un des deux comme gateway
+
+- Désactivez l'interface WiFi sur l'un des postes.
+- Sur le PC qui n'a plus Internet (PC2), configurez comme passerelle l'adresse IP de l'autre PC (PC1).
+- Sur le PC qui a Internet (PC1), activez le routage/partage :
+
+  - Linux (temporaire) : `sudo sysctl -w net.ipv4.ip_forward=1`
+  - Ou activez le partage via Network Manager / l'interface graphique.
+
+- Pour tester l'accès Internet depuis PC2 : `ping 8.8.8.8`.
+
+5. Petit chat privé ?
+
+L'un fait office de serveur, l'autre de client. Utilisez `netcat` (`nc`) :
+
+- Sur le PC serveur (ex : 192.168.1.1) écoutez sur un port :
+
+  - Linux: `nc -l 8888`
+
+- Sur le PC client : `nc 192.168.1.1 8888`
+
+
+
+6. Wireshark
+
+- Capturez les trames entre vos deux cartes Ethernet pendant :
+
+  - un `ping`
+  - une session `netcat`
+  - un test où PC1 sert de gateway
+
+- Prenez des captures d'écran des trames et conservez-les pour l'analyse.
+
+7. Firewall
+
+- Travaillez par paires :
+
+  - Activez le firewall.
+  - Autorisez le ping (ICMP type 8/0).
+  - Autorisez `nc` sur un port choisi entre `1024` et `20000`.
+
+- Testez la communication `netcat` avec le firewall activé sur le PC serveur.
+
+
+
+
 
 III. Manipulations d'autres outils/protocoles côté client
 
@@ -200,5 +279,7 @@ A quoi la MAC si on a des IP ? => Se renseigner sur ARP :
 
     -Le protocole Arp sert a retrouver une adresse MAC quand on a une adresse IP.
     -On peut utiliser la commande "arp -a" pour retrouver les IP, l'adresse MAC associé et enfin le type ( Dynamique ou statique)
+
+utiliser un switch (physique) et se connecter non pas à 2, mais à 3 ou 4 ou 5 et faire mumuse avec le réseau ainsi créé :
 
 utiliser un switch (physique) et se connecter non pas à 2, mais à 3 ou 4 ou 5 et faire mumuse avec le réseau ainsi créé :
