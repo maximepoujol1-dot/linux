@@ -9,7 +9,7 @@ I. Sans que je vous donne les réponses à chaque étape
         Créer un fichier `data.bin` contenant 100 Ko de données binaires aléatoires.
         Vérifier sa taille.
 
-![tp3_c1](img_tp3/tp3_c1)
+![tp3_c1](img_tp3/tp3_c1.png)
 
         2. Encodage
 
@@ -17,7 +17,7 @@ I. Sans que je vous donne les réponses à chaque étape
         Afficher son contenu.
         Comparer la taille de `data.bin` et `data.b64`.
 
-![tp3_c2](img_tp3/tp3_c2)
+![tp3_c2](img_tp3/tp3_c2.png)
 
         3. Décodage
 
