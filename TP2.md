@@ -117,22 +117,38 @@ II. Exploration locale en duo
 
 - Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau. Exemples :
 
-  - PC1 : 192.168.1.10/24
-  - PC2 : 192.168.1.11/24
+  - PC1 : 
+
+![c14](img/c14.png)
+
+  - PC2 : 
+
+![c15](img/c15.png)
 
 - Vérifiez à l'aide des commandes adaptées :
 
-  - Linux/macOS : `ip addr`
-  - Windows : `ipconfig`
+![c16](img/c16.png)
+
+![c24](img/c24.png)
 
 - Testez la connectivité entre les deux machines avec `ping` :
 
-  - PC1 -> PC2 : `ping 192.168.1.11`
-  - PC2 -> PC1 : `ping 192.168.1.10`
+  - PC1 -> PC2 : 
 
-- Essayez différents masques : `/20`, `/24`, puis le plus petit réseau que vous pouvez configurer.
+![c17](img/c17.png)
+
+  - PC2 -> PC1 : 
+
+![c18](img/c18.png)
+
 
 - Exercice : inventez un nouveau réseau (ex : `172.16.18.0/24`) et attribuez des adresses aux deux PC.
+
+
+![c20](img/c20.png)
+
+
+![c21](img/c21.png)
 
 4. Utilisation d'un des deux comme gateway
 
@@ -162,22 +178,29 @@ L'un fait office de serveur, l'autre de client. Utilisez `netcat` (`nc`) :
 - Capturez les trames entre vos deux cartes Ethernet pendant :
 
   - un `ping`
-  - une session `netcat`
-  - un test où PC1 sert de gateway
 
-- Prenez des captures d'écran des trames et conservez-les pour l'analyse.
+![c22](img/c22.webp)
+  
+  - une session `netcat`
+
+![c23](img/c23.webp)
+
 
 7. Firewall
 
 - Travaillez par paires :
 
-  - Activez le firewall.
-  - Autorisez le ping (ICMP type 8/0).
+  - Activez le firewall et autorisez le ping (ICMP type 8/0).
+
+![c25](img/c25.png)
+
   - Autorisez `nc` sur un port choisi entre `1024` et `20000`.
+
+ ![c26](img/c26.png) 
 
 - Testez la communication `netcat` avec le firewall activé sur le PC serveur.
 
-
+![c27](img/c27.png)
 
 
 
