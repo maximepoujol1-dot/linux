@@ -115,21 +115,11 @@ II. Exploration locale en duo
 
 3. Modification d'adresse IP
 
-- Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau. Exemples :
-
-  - PC1 : 
-
-![c14](img/c14.png)
-
-  - PC2 : 
-
-![c15](img/c15.png)
+- Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau :
 
 - Vérifiez à l'aide des commandes adaptées :
 
 ![c16](img/c16.png)
-
-![c24](img/c24.png)
 
 - Testez la connectivité entre les deux machines avec `ping` :
 
@@ -156,10 +146,12 @@ II. Exploration locale en duo
 - Sur le PC qui n'a plus Internet (PC2), configurez comme passerelle l'adresse IP de l'autre PC (PC1).
 - Sur le PC qui a Internet (PC1), activez le routage/partage :
 
-  - Linux (temporaire) : `sudo sysctl -w net.ipv4.ip_forward=1`
-  - Ou activez le partage via Network Manager / l'interface graphique.
+  - Linux : `sudo sysctl -w net.ipv4.ip_forward=1`
+
 
 - Pour tester l'accès Internet depuis PC2 : `ping 8.8.8.8`.
+
+![c28](img/c28.png)
 
 5. Petit chat privé ?
 
@@ -171,7 +163,7 @@ L'un fait office de serveur, l'autre de client. Utilisez `netcat` (`nc`) :
 
 - Sur le PC client : `nc 192.168.1.1 8888`
 
-
+![cnet](img/cnet.png)
 
 6. Wireshark
 
@@ -267,6 +259,7 @@ faites un reverse lookup (= "dis moi si tu connais un nom de domaine pour telle 
     pour l'adresse 78.78.21.21 :
 
 ![c11](img/c11.png)       
+
 
     pour l'adresse 92.16.54.88 :
 

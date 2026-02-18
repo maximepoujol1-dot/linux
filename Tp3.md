@@ -11,6 +11,7 @@ I. Sans que je vous donne les réponses à chaque étape
 
 ![tp3_c1](img_tp3/tp3_c1.png)
 
+
         2. Encodage
 
         Encoder le fichier en Base64 dans un fichier `data.b64`.
