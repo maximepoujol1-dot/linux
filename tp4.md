@@ -302,19 +302,29 @@ ls -la /var/www/site-tp
 
 
 Test SSH :
+---
 ![tp4_c26](img_tp4/c26.png)
+---
 
 Test Fail2Ban :
+---
 ![tp4_c26](img_tp4/c26.1.png)
+---
 
 Test Nginx :
+---
 ![tp4_c26](img_tp4/c26.2.png)
+---
 
 Test transfert:
+---
 ![tp4_c26](img_tp4/c26.3.png)
+---
 
 Test firewall:
+---
 ![tp4_c26](img_tp4/c26.4.png)
+---
 
 ---
 
