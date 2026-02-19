@@ -12,20 +12,18 @@ Installez VirtualBox et créez une VM Ubuntu :
 - **Disque** : 20 Go
 - **Réseau** : Bridged Adapter
 
-![tp4_c1](img_tp4/c1)
+![tp4_c1](img_tp4/c1.png)
 
 ### 1.2 Vérification de la connectivité réseau
 
-Vérifiez que la VM a une IP accessible depuis la machine hôte.
+Vérifiez que la VM a une IP accessible depuis la machine hôte avec les commandes :
 
-**Pistes** : `ip a`, `ping <IP_VM>`
 
-```bash
-ip a
-ping <IP_VM>
-```
+-`ip a`
+-`ping <IP_VM>`
 
-![tp4_c2](img_tp4/c2)
+
+![tp4_c2](img_tp4/c2.png)
 
 ---
 
@@ -33,51 +31,43 @@ ping <IP_VM>
 
 ### 2.1 Installation du serveur SSH
 
-Installez le serveur SSH sur la VM.
+Installez le serveur SSH sur la VM avec les commandes :
 
-**Indice** : chercher le paquet `openssh-server`
 
-```bash
-sudo apt update
-sudo apt install openssh-server
-```
+-sudo apt update
+-sudo apt install openssh-server
 
-![tp4_c3](img_tp4/c3)
+
+![tp4_c3](img_tp4/c3.png)
 
 ### 2.2 Vérification du service SSH
 
-Vérifiez que le service SSH fonctionne et écoute sur un port.
+Vérifiez que le service SSH fonctionne et écoute sur un port avec les commandes :
 
-**Piste** : `systemctl status` + `ss` ou `netstat`
+-`systemctl status`
+-`ss` ou `netstat`
 
 
 
-![tp4_c4](img_tp4/c4)
+![tp4_c4](img_tp4/c4.png)
 
 ### 2.3 Connexion SSH depuis la machine hôte
 
 Connectez-vous depuis la machine hôte :
 
-```bash
-ssh etudiant@<IP_VM>
-```
 
-![tp4_c5](img_tp4/c5)
+![tp4_c5](img_tp4/c5.png)
 
 ### 2.4 Authentification par clé SSH
 
 Générez une clé SSH sur la machine cliente et copiez-la sur le serveur pour tester la connexion sans mot de passe.
 
-**Pistes** : `ssh-keygen`, `ssh-copy-id`
+Générer et copier une clé avec les commandes : `ssh-keygen`, `ssh-copy-id`
 
-```bash
-ssh-keygen -t rsa -b 4096
-ssh-copy-id etudiant@<IP_VM>
-```
 
-![tp4_c6](img_tp4/c6)
-![tp4_c6](img_tp4/c6.2)
-![tp4_c6](img_tp4/c6).3
+![tp4_c6](img_tp4/c6.png)
+![tp4_c6](img_tp4/c6.2.png)
+![tp4_c6](img_tp4/c6.3.png)
 
 ---
 
@@ -91,50 +81,33 @@ Modifiez la configuration SSH sur le serveur pour renforcer la sécurité :
 2. **Désactivez l'authentification par mot de passe**
 3. **Changez le port par défaut (22)** pour réduire les tentatives de brute-force
 
-**Piste** : recherchez le fichier `/etc/ssh/sshd_config` et les options `PermitRootLogin`, `PasswordAuthentication`
+recherchez le fichier `/etc/ssh/sshd_config` et les options `PermitRootLogin`, `PasswordAuthentication`
 
-```bash
-sudo nano /etc/ssh/sshd_config
-```
+
 
 Modifications à effectuer :
-```
-Port 2222
-PermitRootLogin no
-PasswordAuthentication no
-```
 
-![tp4_c7](img_tp4/c7)
+-Port 2222
+-PermitRootLogin no
+-PasswordAuthentication no
+
+
+
 
 ### 3.2 Redémarrage et test
 
 Redémarrez le service SSH et testez la connexion avec le nouveau port depuis la machine cliente.
 
-```bash
-sudo systemctl restart ssh
-ssh -p 2222 etudiant@<IP_VM>
-```
+![tp4_c7](img_tp4/c7.png)
 
-![tp4_c8](img_tp4/c8)
 
 ### 3.3 Création d'un alias SSH
 
 Créez un alias SSH dans `~/.ssh/config` pour simplifier les connexions.
 
-```bash
-nano ~/.ssh/config
-```
 
-Contenu :
-```
-Host serveur-tp
-    HostName <IP_VM>
-    User etudiant
-    Port 2222
-    IdentityFile ~/.ssh/id_rsa
-```
 
-![tp4_c9](img_tp4/c9)
+![tp4_c8](img_tp4/c8.png)
 
 ---
 
@@ -144,40 +117,28 @@ Host serveur-tp
 
 Transférez un fichier depuis la machine cliente vers le serveur :
 
-```bash
-scp fichier.txt serveur-tp:/home/etudiant/
-```
 
-![tp4_c10](img_tp4/c10)
+![tp4_c10](img_tp4/c10.png)
 
 ### 4.2 Transfert avec SFTP
 
 Explorez les commandes `put`, `get`, `ls` pour transférer et naviguer sur le serveur.
 
-```bash
-sftp serveur-tp
-```
-
 Commandes SFTP :
-```
-ls
-put fichier.txt
-get fichier_distant.txt
-```
 
-![tp4_c11](img_tp4/c11)
+-ls
+-put fichier.txt
+-get fichier_distant.txt
+
+
+![tp4_c11](img_tp4/c11.png)
 
 ### 4.3 Synchronisation avec RSYNC
 
 Synchronisez un dossier entre client et serveur.
 
-**Pistes** : utilisez les options `-a` (archive), `-v` (verbose), `-z` (compression)
 
-```bash
-rsync -avz /chemin/local/ serveur-tp:/chemin/distant/
-```
-
-![tp4_c12](img_tp4/c12)
+![tp4_c12](img_tp4/c12.png)
 
 ---
 
@@ -185,38 +146,35 @@ rsync -avz /chemin/local/ serveur-tp:/chemin/distant/
 
 ### 5.1 Suivi des logs d'authentification
 
-Suivez les logs d'authentification pour observer les connexions SSH :
+Suivez les logs d'authentification pour observer les connexions SSH avec la commande :
 
-```bash
-sudo tail -f /var/log/auth.log
-```
 
-![tp4_c13](img_tp4/c13)
+-sudo tail -f /var/log/auth.log
+
+
+![tp4_c13](img_tp4/c13.png)
 
 ### 5.2 Installation et configuration de Fail2Ban
 
-Installez Fail2Ban et testez un bannissement après plusieurs tentatives échouées.
+Installez Fail2Ban et testez un bannissement après plusieurs tentatives échouées avec les commandes :
 
-```bash
-sudo apt install fail2ban
-sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
-```
+
+-sudo apt install fail2ban
+-sudo systemctl enable fail2ban
+-sudo systemctl start fail2ban
+
 
 Configuration :
-```bash
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-sudo nano /etc/fail2ban/jail.local
-```
 
-![tp4_c14](img_tp4/c14)
 
-Vérification :
-```bash
-sudo fail2ban-client status sshd
-```
+![tp4_c14](img_tp4/c14.png)
 
-![tp4_c15](img_tp4/c15)
+Vérification avec la commande :
+
+-sudo fail2ban-client status sshd
+
+
+![tp4_c15](img_tp4/c15.png)
 
 ---
 
@@ -224,23 +182,25 @@ sudo fail2ban-client status sshd
 
 ### 6.1 Tunnel local
 
-Créez un tunnel local pour accéder à un service web distant depuis la machine cliente.
+Créez un tunnel local pour accéder à un service web distant depuis la machine cliente avec la commande :
 
-```bash
-ssh -L 8080:localhost:80 serveur-tp
-```
 
-![tp4_c16](img_tp4/c16)
+-ssh -L 8080:localhost:80 serveur-tp
+
+
+![tp4_c16](img_tp4/c16.1.png)
+![tp4_c16](img_tp4/c16.2.png)
+![tp4_c16](img_tp4/c16.3.png)
 
 ### 6.2 Tunnel distant
 
-Créez un tunnel distant pour permettre l'accès SSH au client via le serveur.
+Créez un tunnel distant pour permettre l'accès SSH au client via le serveur avec la commande :
 
-```bash
-ssh -R 9090:localhost:22 serveur-tp
-```
 
-![tp4_c17](img_tp4/c17)
+-ssh -R 9090:localhost:22 serveur-tp
+
+
+![tp4_c17](img_tp4/c17.png)
 
 ---
 
@@ -248,123 +208,47 @@ ssh -R 9090:localhost:22 serveur-tp
 
 ### 7.1 Installation de Nginx
 
-Installez Nginx sur la VM.
+Installez Nginx sur la VM avec les commandes :
 
-```bash
-sudo apt install nginx
-sudo systemctl enable nginx
-sudo systemctl start nginx
-```
 
-![tp4_c18](img_tp4/c18)
+-sudo apt install nginx
+-sudo systemctl enable nginx
+-sudo systemctl start nginx
+
+
+![tp4_c18](img_tp4/c18.png)
 
 ### 7.2 Création du site test
 
 Créez un site test dans `/var/www/site-tp` et un fichier `index.html` avec un message de bienvenue.
 
-```bash
-sudo mkdir -p /var/www/site-tp
-sudo nano /var/www/site-tp/index.html
-```
 
-Contenu de `index.html` :
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TP4 - Site Test</title>
-</head>
-<body>
-    <h1>Bienvenue sur le site test du TP4</h1>
-    <p>Serveur Nginx fonctionnel !</p>
-</body>
-</html>
-```
-
-![tp4_c19](img_tp4/c19)
+![tp4_c19](img_tp4/c19.png)
 
 ### 7.3 Configuration Nginx pour HTTP
 
 Configurez Nginx pour servir ce site sur HTTP.
 
-```bash
-sudo nano /etc/nginx/sites-available/site-tp
-```
+![tp4_c20](img_tp4/c20.1.png)
 
-Configuration :
-```nginx
-server {
-    listen 80;
-    server_name _;
-    root /var/www/site-tp;
-    index index.html;
-    
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-```
-
-Activation du site :
-```bash
-sudo ln -s /etc/nginx/sites-available/site-tp /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
-![tp4_c20](img_tp4/c20)
+![tp4_c20](img_tp4/c20.2.png)
 
 ### 7.4 Génération du certificat SSL
 
 Générez un certificat auto-signé pour HTTPS.
 
-**Piste** :
-```bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/nginx-selfsigned.key \
-    -out /etc/ssl/certs/nginx-selfsigned.crt
-```
-
-![tp4_c21](img_tp4/c21)
+![tp4_c21](img_tp4/c21.png)
 
 ### 7.5 Configuration HTTPS avec redirection
 
 Configurez la redirection HTTP → HTTPS.
 
-```bash
-sudo nano /etc/nginx/sites-available/site-tp
-```
 
-Configuration complète :
-```nginx
-server {
-    listen 80;
-    server_name _;
-    return 301 https://$host$request_uri;
-}
+![tp4_c22](img_tp4/c22.png)
 
-server {
-    listen 443 ssl;
-    server_name _;
-    
-    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-    
-    root /var/www/site-tp;
-    index index.html;
-    
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-```
+![tp4_c22](img_tp4/c22.1.png)
 
-```bash
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
-![tp4_c22](img_tp4/c22)
+![tp4_c22](img_tp4/c22.2.png)
 
 ### 7.6 Test du site HTTPS
 
@@ -374,7 +258,7 @@ Testez le site depuis le client :
 curl -k https://<IP_VM>
 ```
 
-![tp4_c23](img_tp4/c23)
+![tp4_c23](img_tp4/c23.png)
 
 ---
 
@@ -392,7 +276,9 @@ sudo ufw allow 2222/tcp
 sudo ufw status
 ```
 
-![tp4_c24](img_tp4/c24)
+![tp4_c24](img_tp4/c24.png)
+
+![tp4_c24.1](img_tp4/c24.1.png)
 
 ### 8.2 Vérification des permissions
 
@@ -406,42 +292,29 @@ sudo chmod -R 755 /var/www/site-tp
 ls -la /var/www/site-tp
 ```
 
-![tp4_c25](img_tp4/c25)
+![tp4_c25](img_tp4/c25.png)
 
 ---
 
 ## Partie 9 – Validation finale
 
-### Checklist de validation
-
-- ✅ **SSH fonctionnel** sur port personnalisé et authentification par clé uniquement
-- ✅ **Fail2Ban actif** et opérationnel
-- ✅ **Transferts de fichiers fonctionnels** (SCP, SFTP, RSYNC)
-- ✅ **Nginx accessible** en HTTP et HTTPS avec redirection automatique HTTP → HTTPS
-- ✅ **Certificat SSL** auto-signé valide
-- ✅ **Firewall configuré** et permissions correctes sur `/var/www/site-tp`
-
 ### Tests finaux
 
-```bash
-# Test SSH
-ssh serveur-tp
 
-# Test transfert
-scp test.txt serveur-tp:~/
+Test SSH :
+![tp4_c26](img_tp4/c26.png)
 
-# Test Fail2Ban
-sudo fail2ban-client status
+Test Fail2Ban :
+![tp4_c26](img_tp4/c26.1.png)
 
-# Test Nginx
-curl -I http://<IP_VM>
-curl -k https://<IP_VM>
+Test Nginx :
+![tp4_c26](img_tp4/c26.2.png)
 
-# Test firewall
-sudo ufw status
-```
+Test transfert:
+![tp4_c26](img_tp4/c26.3.png)
 
-![tp4_c26](img_tp4/c26)
+Test firewall:
+![tp4_c26](img_tp4/c26.4.png)
 
 ---
 
