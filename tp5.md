@@ -95,6 +95,8 @@ Configurez le serveur DHCP pour le réseau LAN.
 
 ![tp5_c4](img_tp5/c4.png)
 
+avec la gateaway : 192.168.56.103
+
 Questions :
 
 
@@ -348,7 +350,7 @@ Comprendre le sens du trafic
 
 Mettez en place une zone DMZ.
 
-![tp5_c15](img_tp5/c15.png)
+
 
 Pas assez de ressource
 
