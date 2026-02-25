@@ -52,7 +52,8 @@ Questions :
 
 Où se gèrent les utilisateurs ?
 
-    -
+    - ils se gèrent dans le user manager
+
 
 Qu’est-ce qu’un mot de passe robuste ?
 
