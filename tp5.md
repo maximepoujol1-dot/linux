@@ -85,7 +85,7 @@ Quelle interface correspond au réseau interne ?
 
 Que se passerait-il si les interfaces étaient inversées ?
 
-    - Plus rien ne marche
+    - Plus rien ne marche, le reseau interne est exposé et les règles de parfeu ne s'applique plus
 
 
 # Partie 3 – Configuration des services réseau
