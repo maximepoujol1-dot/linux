@@ -18,11 +18,6 @@ Installez VirtualBox et créez une VM Ubuntu :
 
 Vérifiez que la VM a une IP accessible depuis la machine hôte avec les commandes :
 
-
--`ip a`
--`ping <IP_VM>`
-
-
 ![tp4_c2](img_tp4/c2.png)
 
 ---
@@ -43,11 +38,6 @@ Installez le serveur SSH sur la VM avec les commandes :
 ### 2.2 Vérification du service SSH
 
 Vérifiez que le service SSH fonctionne et écoute sur un port avec les commandes :
-
--`systemctl status`
--`ss` ou `netstat`
-
-
 
 ![tp4_c4](img_tp4/c4.png)
 
@@ -85,7 +75,7 @@ recherchez le fichier `/etc/ssh/sshd_config` et les options `PermitRootLogin`, `
 
 
 
-Modifications à effectuer :
+Modifications effectuer :
 
 -Port 2222
 -PermitRootLogin no
@@ -125,10 +115,6 @@ Transférez un fichier depuis la machine cliente vers le serveur :
 Explorez les commandes `put`, `get`, `ls` pour transférer et naviguer sur le serveur.
 
 Commandes SFTP :
-
--ls
--put fichier.txt
--get fichier_distant.txt
 
 
 ![tp4_c11](img_tp4/c11.png)
