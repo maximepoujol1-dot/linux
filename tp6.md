@@ -47,7 +47,6 @@ Vous devez mettre en place :
 
 # Création de l'infrastructure Easy-RSA
 
-
 -   Créer un environnement PKI
 -   Générer :
     -   Une CA
@@ -56,25 +55,61 @@ Vous devez mettre en place :
     -   Les paramètres Diffie-Hellman
     -   Une clé TLS supplémentaire
 
-![tp6_c1](img_tp6/c1.png)
+- On creer un CA :
+
+![tp6_c1](img_tp6/c1.1.png)
+
+![tp6_c1](img_tp6/c1.2.png)
+
+
+- On creer un certificat serveur :
+
+![tp6_c1](img_tp6/c1.3.png)
+
+![tp6_c1](img_tp6/c1.4.png)
+
+- On creer un certificat client :
+
+![tp6_c1](img_tp6/c1.5.png)
+
+![tp6_c1](img_tp6/c1.6.png)
+
+- paramètre Diffie-Hellman
+
+![tp6_c1](img_tp6/c1.7.png)
+
+- Clé TLS
+
+![tp6_c1](img_tp6/c1.8.png)
 
 ### Questions : 
 
 1. Où Easy-RSA crée-t-il ses fichiers ?
 
-    -
+    - il est dans : ~/easy-rsa/pki/
 
 2. Que contient le dossier `pki/` ?
 
-    -
+    - il contient :
+        
+        ca.crt
+
+        issued/
+
+        private/
+
+        dh.pem
 
 3. Quelle est la différence entre `gen-req` et `sign-req` ?
 
-    -
+    - gen-req : génère la demande et clé privée
+
+    - sign-req : la CA signe la demande pour créer le vrai certificat 
 
 4. Que se passe-t-il si vous oubliez de signer un certificat ?
 
-    -
+    - Si on oubli de signer un certificat OpenVPN ne pourra pas démarrer 
+
 
 
 # Partie 2 : Configuration du serveur OpenVPN
@@ -90,21 +125,23 @@ Créer un fichier de configuration serveur.
 -   Réseau attribué aux clients
 -   Références aux certificats
 
-![tp6_c2](img_tp6/c2.png)
+![tp6_c2](img_tp6/c2.1.png)
 
 ### Questions : 
 
 1. Que signifie `dev tun` ?
 
-    -
+    - dev tun fait en sorte que le serveur VPN fasse office de routeur. Le client reçoit une adresse IP attribuée qui sera (généralement) différente de son sous-réseau IP local. Cela évite les problèmes de chevauchement des adresses IP. 
 
 2. Quelle est la différence entre UDP et TCP pour un VPN ?
 
-    -
+    - UDP est très rapide mais moins fiable car ne vérifie pas l'arrivé des pacquets
+
+    - plus lent mais fiable grace au nombreuse vérification éffectué
 
 3. Quelle plage IP choisir pour le VPN ? Pourquoi ?
 
-    -
+    - 
 
 
 
@@ -113,21 +150,21 @@ Créer un fichier de configuration serveur.
 -   Activer le forwarding IP
 -   Mettre en place une règle NAT pour avoir l'accès internet depuis le vpn
 
-![tp6_c3](img_tp6/c3.png)
+![tp6_c3](img_tp6/c3.1.png)
 
 ### Questions : 
 
 1.   Où se configure le paramètre `ip_forward` ?
     
-    -
+    - Dans : /etc/sysctl.conf
 
 2.   Quelle commande permet d'afficher les règles NAT actuelles ?
 
-    -
+    - les règles nat peuvent être affiché via : sudo iptables -t nat -L -n -v
 
 3.  Pourquoi faut-il "masquerader" le réseau VPN ?
 
-    -
+    - Mascarader permet aux clients VPN d’accéder à Internet via l’IP du serveur.
 
 
 
@@ -140,12 +177,20 @@ Créer un fichier de configuration serveur.
 
 ### Si le service échoue :
 
--   Quelle commande permet d'afficher les logs système d'un service ?
--   Quelle est la différence entre `status` et `journalctl` ?
--   Les chemins vers les certificats sont-ils corrects ?
+1. Quelle commande permet d'afficher les logs système d'un service ?
 
+- journalctl -u openvpn-server@server
 
-![tp6_c5](img_tp6/c5.png)
+2. Quelle est la différence entre `status` et `journalctl` ?
+
+- status permet de voir l'etat de la technologie, si elle est active ou non
+
+- journalctl permet d'afficher les logs enregistrés et de les filtrer selon divers critères et de surveiller en temps réel les nouveaux événements
+
+3. Les chemins vers les certificats sont-ils corrects ?
+
+- oui
+
 
 # Partie 3 : Création du profil client
 
@@ -160,7 +205,7 @@ Créer un fichier `.ovpn` fonctionnel.
 -   Paramètres de chiffrement
 -   Authentification TLS
 
-![tp6_c6](img_tp6/c6.png)
+![tp6_c6](img_tp6/c6.1.png)
 
 ### Questions : 
 
@@ -168,10 +213,11 @@ Créer un fichier `.ovpn` fonctionnel.
 
     -
 
-2.   Pourquoi la clé privée ne doit-elle jamais être partagée
-    publiquement ?
+2.   Pourquoi la clé privée ne doit-elle jamais être partagée publiquement ?
     
-    -
+    - Parce que elle permet d'assurer une grande sécurité en permettant de s'identifier et avoir accés aux infirmation sensible.
+
+    -Si elle est partagé, quelqu'un peut se connecter a notre place et avoir accés au information.
 
 
 
@@ -189,11 +235,11 @@ Vous devez être capables de :
 
 1.   Comment vérifier que votre trafic passe par le VPN ?
 
-    -
+    - 
 
 2.   Que se passe-t-il si le port 1194 est bloqué ?
 
-    -
+    - La connexion ne pourra pas s'établir si le port est bloqué, empéchant les tentative de connexion et provoquant des time out.
 
 
 
