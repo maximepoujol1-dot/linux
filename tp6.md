@@ -207,11 +207,15 @@ Créer un fichier `.ovpn` fonctionnel.
 
 ![tp6_c6](img_tp6/c6.1.png)
 
+![tp6_c6](img_tp6/c6.2.png)
+
+![tp6_c6](img_tp6/c6.3.png)
+
 ### Questions : 
 
 1.   Comment intégrer un certificat directement dans un fichier `.ovpn` ?
 
-    -
+    - On utilise des balise tel que <ca> et </ca> ou  <cert> et </cert> .
 
 2.   Pourquoi la clé privée ne doit-elle jamais être partagée publiquement ?
     
@@ -226,20 +230,17 @@ Créer un fichier `.ovpn` fonctionnel.
 Vous devez être capables de :
 
 -   Établir une connexion VPN
--   Vérifier l'adresse IP obtenue
--   Vérifier l'accès Internet via le tunnel
 
-![tp6_c7](img_tp6/c7.png)
+-   Vérifier l'adresse IP obtenue
+
+-   Vérifier l'accès Internet via le tunnel
 
 ### Questions :
 
 1.   Comment vérifier que votre trafic passe par le VPN ?
 
-    - 
+    - On utilise la commande "curl ifconfig.me"
 
 2.   Que se passe-t-il si le port 1194 est bloqué ?
 
     - La connexion ne pourra pas s'établir si le port est bloqué, empéchant les tentative de connexion et provoquant des time out.
-
-
-
