@@ -173,7 +173,7 @@ Créer un fichier de configuration serveur.
 -   Démarrer le service OpenVPN
 -   Vérifier son état
 
-![tp6_c4](img_tp6/c4.png)
+![tp6_c4](img_tp6/c4.1.png)
 
 ### Si le service échoue :
 
